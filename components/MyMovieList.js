@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, StatusBar, StyleSheet, SafeAreaView } from 'react-native'
+import { View, Text, StatusBar, StyleSheet, SafeAreaView, ActivityIndicator } from 'react-native'
 import { db, collection, getDocs } from '../firebase/index';
 import { FlatList } from 'react-native-gesture-handler';
 
@@ -8,14 +8,9 @@ const MyMovieList = () => {
 
   const getMovieList = async () => {
     const querySnapshot = await getDocs(collection(db, "movie"));
-    querySnapshot.forEach((doc) => {
-      console.log('qqq', doc.id, doc.data())
-      const { title, id } = doc.data()
-      setMovieList({
-        ...doc.data(),
-        id: doc.id
-      })
-    });
+    setMovieList(querySnapshot.docs.map((doc => ({ ...doc.data(), id: doc.id }))))
+
+    console.log(movieList)
   }
 
   const Item = ({ title }) => {
@@ -23,7 +18,6 @@ const MyMovieList = () => {
       <View style={styles.item} >
         <Text style={styles.title}>{title}</Text>
       </View>
-
     )
   }
 
@@ -31,16 +25,15 @@ const MyMovieList = () => {
     getMovieList()
   }, [])
 
-  console.log('xxx', movieList)
+  console.log('xxx', movieList.length)
   return (
     <SafeAreaView style={styles.container}>
-      <Text>Tim</Text>
-      {movieList > 1 ? (
+      {movieList.length > 0 ? (
         <FlatList
           data={movieList}
-          renderItem={({ item }) => <Text>{item}</Text>}
+          renderItem={({ item }) => <Item title={item.title} style={styles.title} />}
           keyExtractor={item => item.id} />
-      ) : null
+      ) : (<ActivityIndicator />)
       }
     </SafeAreaView>
   )
@@ -48,7 +41,6 @@ const MyMovieList = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     marginTop: StatusBar.currentHeight || 0,
   },
   item: {
@@ -58,7 +50,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
   },
   title: {
-    fontSize: 32,
+    fontSize: 16,
   },
 });
 

@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import { SafeAreaView, TextInput, StyleSheet } from 'react-native';
-import { add, db, getFirestore, collection, addDoc } from '../firebase/index';
-import { MOVIES_LIST } from '../constants/movieList';
+import { db, collection, addDoc } from '../firebase/index';
 
 const SearchBar = () => {
   const [movie, setMovie] = useState('');
-  // const movieTitle = MOVIES_LIST.map((movie) => movie.title)
 
   const addToFirebase = async () => {
     try {
@@ -18,6 +16,7 @@ const SearchBar = () => {
     } catch (e) {
       console.error("Error adding document: ", e);
     }
+
   }
   console.log('qqq', movie)
   return (
