@@ -3,6 +3,8 @@ import { View, Text, StatusBar, StyleSheet, SafeAreaView, ActivityIndicator } fr
 import { db, collection, getDocs } from '../firebase/index';
 import { FlatList } from 'react-native-gesture-handler';
 
+
+// This should grab information frmo database in load
 const MyMovieList = () => {
   const [movieList, setMovieList] = useState([])
 
@@ -25,7 +27,6 @@ const MyMovieList = () => {
     getMovieList()
   }, [])
 
-  console.log('xxx', movieList.length)
   return (
     <SafeAreaView style={styles.container}>
       {movieList.length > 0 ? (
