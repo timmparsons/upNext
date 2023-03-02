@@ -1,19 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { View, Text, StatusBar, StyleSheet, SafeAreaView, ActivityIndicator } from 'react-native'
-import { db, collection, getDocs } from '../firebase/index';
 import { FlatList } from 'react-native-gesture-handler';
+import { getMoviesFromDb } from '../redux/slices/moviesSlice';
 
 
 // This should grab information frmo database in load
 const MyMovieList = () => {
-  const [movieList, setMovieList] = useState([])
-
-  const getMovieList = async () => {
-    const querySnapshot = await getDocs(collection(db, "movie"));
-    setMovieList(querySnapshot.docs.map((doc => ({ ...doc.data(), id: doc.id }))))
-
-    console.log(movieList)
-  }
 
   const Item = ({ title }) => {
     return (
@@ -24,18 +16,18 @@ const MyMovieList = () => {
   }
 
   useEffect(() => {
-    getMovieList()
+    getMoviesFromDb
   }, [])
 
   return (
     <SafeAreaView style={styles.container}>
-      {movieList.length > 0 ? (
+      {/* {movieList.length > 0 ? (
         <FlatList
           data={movieList}
           renderItem={({ item }) => <Item title={item.title} style={styles.title} />}
           keyExtractor={item => item.id} />
       ) : (<ActivityIndicator />)
-      }
+      } */}
     </SafeAreaView>
   )
 }
@@ -46,7 +38,7 @@ const styles = StyleSheet.create({
   },
   item: {
     backgroundColor: '#f9c2ff',
-    padding: 20,
+    padding: 10,
     marginVertical: 8,
     marginHorizontal: 16,
   },
