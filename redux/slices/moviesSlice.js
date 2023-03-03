@@ -1,11 +1,12 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { db, collection, addDoc, getDocs } from '../../firebase/index';
+import { db, collection, addDoc } from '../../firebase/index';
+import { getMovies } from '../../components/MyMovieList';
 
 export const addMovieToDb = createAsyncThunk(
   'movies/addMoviesToDb',
-  movie => {
+  async movie => {
     try {
-      const docRef = addDoc(collection(db, "movie"), {
+      const docRef = await addDoc(collection(db, "movie"), {
         id: 'tim',
         title: movie,
       });
@@ -13,23 +14,12 @@ export const addMovieToDb = createAsyncThunk(
     } catch (e) {
       console.error("Error adding document: ", e);
     }
-  }
+		getMovies()
+	}
 )
 
-export const getMoviesFromDb = createAsyncThunk(
-  'movies/getMoviesFromoDb',
-  async (movie) => {
-    const docRef = await getDocs(collection(db, "movie"));
-    docRef.forEach((doc) => {
-      console.log(`${doc.id} => ${doc.data()}`);
-    }
-    )
-  })
-
 const initialState = {
-  status: 'idle',
   movieList: [],
-  error: {}
 }
 
 export const moviesSlice = createSlice({
@@ -43,24 +33,13 @@ export const moviesSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(addMovieToDb.pending, (state, action) => {
-      state.status = 'loding',
-        state.movieList = [],
-        state.error = {}
+      state.movieList = []
     }),
       builder.addCase(addMovieToDb.fulfilled, (state, action) => {
-        state.status = 'idle',
-          state.movieList = action.payload,
-          state.error = {}
+        state.movieList = action.payload
       }),
       builder.addCase(addMovieToDb.rejected, (state, action) => {
-        state.status = 'idle',
-          state.movieList = [],
-          state.error = action.payload
-      }),
-      builder.addCase(getMoviesFromDb.fulfilled, (state, action) => {
-        state.status = 'idle',
-          state.movieList = action.payload,
-          state.error = {}
+        state.movieList = []
       })
   }
 });
