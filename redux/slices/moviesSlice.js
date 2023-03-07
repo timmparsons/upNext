@@ -6,7 +6,7 @@ export const addMovieToDb = createAsyncThunk(
   'movies/addMoviesToDb',
   async movie => {
     try {
-      const docRef = await addDoc(collection(db, "movie"), {
+      const docRef = await addDoc(collection(db, 'movie'), {
         id: 'tim',
         title: movie,
       });

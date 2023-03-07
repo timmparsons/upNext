@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux';
 import { View, Text, StatusBar, StyleSheet, SafeAreaView, ActivityIndicator } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler';
 import { collection, getDocs, db } from '../firebase/index'; 
@@ -8,13 +7,13 @@ import { collection, getDocs, db } from '../firebase/index';
 const MyMovieList = () => {
 	const [moviesFromDb, setMoviesFromDb] = useState([]);
 	
-const getMovies = async() => {
-		const querySnapshot = await getDocs(collection(db, "movie"));
-		setMoviesFromDb(
-			querySnapshot.docs.map(doc => ({...doc.data(), id: doc.id}))
-		)
-		console.log(moviesFromDb);
-	};
+	const getMovies = async(setMoviesFromDb) => {
+			const querySnapshot = await getDocs(collection(db, "movie"));
+			setMoviesFromDb(
+				querySnapshot.docs.map(doc => ({...doc.data(), id: doc.id}))
+			)
+			console.log(moviesFromDb);
+		};
 
   const Item = ({ title }) => {
     return (
@@ -28,7 +27,6 @@ const getMovies = async() => {
     getMovies()
 	}, [])
 	
-	console.log('xxx', moviesFromDb)
   return (
     <SafeAreaView style={styles.container}>
       {moviesFromDb.length > 0 ? (
