@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { SafeAreaView, TextInput, StyleSheet } from 'react-native';
+import { View, TextInput, StyleSheet } from 'react-native';
 import { useDispatch } from 'react-redux'
 import { addMovieToDb, } from '../redux/slices/moviesSlice';
+import { MagnifyingGlassIcon } from 'react-native-heroicons/outline';
 
 const SearchBar = () => {
   const [movie, setMovie] = useState('');
@@ -11,9 +12,11 @@ const SearchBar = () => {
   // Look into removing state hook and just using redux
 
   return (
-    <SafeAreaView>
+    <View style={styles.searchSection}>
+			<MagnifyingGlassIcon style={styles.searchIcon}/>
       <TextInput
-        placeholder="Search movie"
+        placeholder='Pick a movie'
+				keyboardType='default'
         style={styles.input}
         value={movie}
         onChangeText={(text) => setMovie(text)}
@@ -23,20 +26,21 @@ const SearchBar = () => {
         }
         }
       />
-    </SafeAreaView>
+    </View>
   )
 }
 
 const styles = StyleSheet.create({
-  input: {
-    height: 40,
-    width: 400,
-    margin: 12,
-    padding: 10,
-    backgroundColor: '#FAF9F6',
-    borderWidth: '0.2px #F5F5F5',
-    borderRadius: 8
-  }
+  searchSection: {
+		flexDirection: 'row',
+		backgroundColor: 'lightgray',
+		marginLeft: 10,
+		marginRight: 10,
+		padding: 10
+	},
+	searchIcon: {
+		color: 'gray'
+	}
 })
 
 export default SearchBar;
