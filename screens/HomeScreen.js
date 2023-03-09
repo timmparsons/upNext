@@ -1,8 +1,11 @@
 import React, { useLayoutEffect} from 'react'
-import { View, Text, StyleSheet, SafeAreaView, Image, TextInput } from 'react-native'
+import { View, Text, StyleSheet, SafeAreaView, Image } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
-import { UserIcon, MagnifyingGlassIcon } from 'react-native-heroicons/outline';
+import { UserIcon } from 'react-native-heroicons/outline';
 import SearchBar from '../components/SearchBar';
+import { ScrollView } from 'react-native-gesture-handler';
+import GetSendMovie from '../components/GetSendMovie';
+import { colors } from '../constants';
 
 const HomeScreen = () => {
 	const navigation = useNavigation();
@@ -25,11 +28,14 @@ const HomeScreen = () => {
 						<Text style={styles.profileText}>My Profile</Text>
 						<Text style={styles.locationText}>Current Location</Text>
 					</View>
-						<UserIcon size={35} color='#00CCBB' />
+						<UserIcon size={35} color={colors.main} />
 			</View>
 			<View>
 				<SearchBar />
 			</View>
+			<ScrollView>
+				<GetSendMovie />
+			</ScrollView>
 		</SafeAreaView>
 	)
 }

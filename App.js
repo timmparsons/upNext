@@ -10,12 +10,14 @@ import HomeScreen from './screens/HomeScreen';
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+
   return (
 		<NavigationContainer>
 			<Provider store={store}>
 			<Stack.Navigator>
 				<Stack.Screen name="Home" component={HomeScreen} />
 			</Stack.Navigator>
+
 				{/* <View>
 					<SearchBar />
 					<MyMovieList />

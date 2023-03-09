@@ -3,13 +3,21 @@ import { View, TextInput, StyleSheet } from 'react-native';
 import { useDispatch } from 'react-redux'
 import { addMovieToDb, } from '../redux/slices/moviesSlice';
 import { MagnifyingGlassIcon } from 'react-native-heroicons/outline';
+import { TMDB_BASE_URL, TMDB_API_KEY } from '@env'
 
 const SearchBar = () => {
   const [movie, setMovie] = useState('');
   const dispatch = useDispatch();
 
   // When data inputed in input box, redux gets updated. At the same time we need a listener to push the data to DB
-  // Look into removing state hook and just using redux
+	// Look into removing state hook and just using redux
+	const getMovieApi = async () => {
+		await fetch(`${TMDB_BASE_URL}/movie/popular?api_key=${TMDB_API_KEY}&language=en-US`)
+		.then((response) => response.json())
+		.then((data) =>  console.log(data))
+	}
+
+	getMovieApi()
 
   return (
     <View style={styles.searchSection}>
@@ -33,9 +41,11 @@ const SearchBar = () => {
 const styles = StyleSheet.create({
   searchSection: {
 		flexDirection: 'row',
-		backgroundColor: 'lightgray',
+		backgroundColor: '#F0f1f1',
+		borderRadius: 12,
 		marginLeft: 10,
 		marginRight: 10,
+		marginBottom: 10,
 		padding: 10
 	},
 	searchIcon: {
