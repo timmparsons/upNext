@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { db, collection, addDoc } from '../../firebase/index';
 import { getMovies } from '../../components/MyMovieList';
+import requests from '../../api';
 
 export const addMovieToDb = createAsyncThunk(
   'movies/addMoviesToDb',
@@ -19,7 +20,8 @@ export const addMovieToDb = createAsyncThunk(
 )
 
 const initialState = {
-  movieList: [],
+	movieList: [],
+	searchedMovies: []
 }
 
 export const moviesSlice = createSlice({
@@ -29,21 +31,25 @@ export const moviesSlice = createSlice({
     addMovie: (state, action) => {
       const { payload } = action;
       state.movieList = { ...state.movieList, ...payload }
-    }
+		},
+		searchedMovie: (state, action) => {
+			const { payload } = action;
+			state.searchedMovies = { ...state.state, ...payload};
+		}
   },
   extraReducers: (builder) => {
     builder.addCase(addMovieToDb.pending, (state, action) => {
       state.movieList = []
     }),
-      builder.addCase(addMovieToDb.fulfilled, (state, action) => {
-        state.movieList = action.payload
-      }),
-      builder.addCase(addMovieToDb.rejected, (state, action) => {
-        state.movieList = []
-      })
+		builder.addCase(addMovieToDb.fulfilled, (state, action) => {
+			state.movieList = action.payload
+		}),
+		builder.addCase(addMovieToDb.rejected, (state, action) => {
+			state.movieList = []
+		})
   }
 });
 
-export const { addMovie } = moviesSlice.actions
+export const { addMovie, searchedMovie } = moviesSlice.actions
 
 export default moviesSlice.reducer

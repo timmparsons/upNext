@@ -1,23 +1,23 @@
 import React, { useState } from 'react';
 import { View, TextInput, StyleSheet } from 'react-native';
 import { useDispatch } from 'react-redux'
-import { addMovieToDb, } from '../redux/slices/moviesSlice';
+import { addMovieToDb, searchedMovie } from '../redux/slices/moviesSlice';
 import { MagnifyingGlassIcon } from 'react-native-heroicons/outline';
-import { TMDB_BASE_URL, TMDB_API_KEY } from '@env'
+import { TMDB_BASE_URL, TMDB_API_KEY } from '@env';
+import requests from '../api';
+import { editWordForMovie } from '../helpers';
 
 const SearchBar = () => {
   const [movie, setMovie] = useState('');
   const dispatch = useDispatch();
 
-  // When data inputed in input box, redux gets updated. At the same time we need a listener to push the data to DB
-	// Look into removing state hook and just using redux
-	const getMovieApi = async () => {
-		await fetch(`${TMDB_BASE_URL}/movie/popular?api_key=${TMDB_API_KEY}&language=en-US`)
+	const getMovieApi = async (movie) => {
+		console.log('qqq', editWordForMovie(movie))
+		const formattedMovie = editWordForMovie(movie)
+		await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${TMDB_API_KEY}&language=en-US&query=${editWordForMovie(movie)}&include_adult=false`)
 		.then((response) => response.json())
-		.then((data) =>  console.log(data))
+		.then((data) =>  dispatch(searchedMovie(data)))
 	}
-
-	getMovieApi()
 
   return (
     <View style={styles.searchSection}>
@@ -29,7 +29,8 @@ const SearchBar = () => {
         value={movie}
         onChangeText={(text) => setMovie(text)}
         onSubmitEditing={() => {
-          dispatch(addMovieToDb(movie))
+					getMovieApi(movie)
+          // dispatch(addMovieToDb(movie))
           setMovie('')
         }
         }

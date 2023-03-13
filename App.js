@@ -1,6 +1,4 @@
 import { StyleSheet, Text, View } from 'react-native';
-import SearchBar from './components/SearchBar';
-import MyMovieList from './components/MyMovieList';
 import { store } from './redux/store';
 import { Provider } from 'react-redux'
 import { NavigationContainer } from '@react-navigation/native';

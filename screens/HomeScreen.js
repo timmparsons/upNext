@@ -6,6 +6,7 @@ import SearchBar from '../components/SearchBar';
 import { ScrollView } from 'react-native-gesture-handler';
 import GetSendMovie from '../components/GetSendMovie';
 import { colors } from '../constants';
+import SearchedMovies from '../components/SearchedMovies';
 
 const HomeScreen = () => {
 	const navigation = useNavigation();
@@ -34,8 +35,9 @@ const HomeScreen = () => {
 				<SearchBar />
 			</View>
 			<ScrollView>
-				<GetSendMovie />
+				{/* <GetSendMovie /> */}
 			</ScrollView>
+				<SearchedMovies />
 		</SafeAreaView>
 	)
 }
