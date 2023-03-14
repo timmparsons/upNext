@@ -3,7 +3,8 @@ import { View, Text, Image, StyleSheet } from 'react-native'
 import { useGetMovieByNameQuery } from '../redux/slices/tmdbApi';
 
 const SearchedMovies = () => {
-	
+	const { data, error, isLoading } = useGetMovieByNameQuery('the avengers')
+
 	return (
 		<View style={styles.container}>
 			{isLoading ? 
