@@ -3,21 +3,10 @@ import { View, TextInput, StyleSheet } from 'react-native';
 import { useDispatch } from 'react-redux'
 import { addMovieToDb, searchedMovie } from '../redux/slices/moviesSlice';
 import { MagnifyingGlassIcon } from 'react-native-heroicons/outline';
-import { TMDB_BASE_URL, TMDB_API_KEY } from '@env';
-import requests from '../api';
-import { editWordForMovie } from '../helpers';
+import { useGetMovieByNameQuery } from '../redux/slices/tmdbApi';
 
 const SearchBar = () => {
   const [movie, setMovie] = useState('');
-  const dispatch = useDispatch();
-
-	const getMovieApi = async (movie) => {
-		console.log('qqq', editWordForMovie(movie))
-		const formattedMovie = editWordForMovie(movie)
-		await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${TMDB_API_KEY}&language=en-US&query=${editWordForMovie(movie)}&include_adult=false`)
-		.then((response) => response.json())
-		.then((data) =>  dispatch(searchedMovie(data)))
-	}
 
   return (
     <View style={styles.searchSection}>
@@ -29,8 +18,7 @@ const SearchBar = () => {
         value={movie}
         onChangeText={(text) => setMovie(text)}
         onSubmitEditing={() => {
-					getMovieApi(movie)
-          // dispatch(addMovieToDb(movie))
+					useGetMovieByNameQuery(movie)
           setMovie('')
         }
         }

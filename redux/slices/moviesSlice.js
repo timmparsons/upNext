@@ -15,7 +15,7 @@ export const addMovieToDb = createAsyncThunk(
     } catch (e) {
       console.error("Error adding document: ", e);
     }
-		getMovies()
+		// getMovies()
 	}
 )
 
