@@ -3,8 +3,6 @@ import { View, Text, StyleSheet, SafeAreaView, Image } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
 import { UserIcon } from 'react-native-heroicons/outline';
 import SearchBar from '../components/SearchBar';
-import { ScrollView } from 'react-native-gesture-handler';
-import GetSendMovie from '../components/GetSendMovie';
 import { colors } from '../constants';
 import SearchedMovies from '../components/SearchedMovies';
 
@@ -34,9 +32,7 @@ const HomeScreen = () => {
 			<View>
 				<SearchBar />
 			</View>
-			<ScrollView>
 				{/* <GetSendMovie /> */}
-			</ScrollView>
 				<SearchedMovies />
 		</SafeAreaView>
 	)

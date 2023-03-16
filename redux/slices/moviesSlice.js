@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { db, collection, addDoc } from '../../firebase/index';
 import { getMovies } from '../../components/MyMovieList';
-import requests from '../../api';
+// import requests from '../../api';
 
 export const addMovieToDb = createAsyncThunk(
   'movies/addMoviesToDb',

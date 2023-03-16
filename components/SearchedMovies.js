@@ -1,31 +1,46 @@
 import React from 'react'
-import { View, Text, Image, StyleSheet } from 'react-native'
+import { Image, StyleSheet, ScrollView, Text } from 'react-native'
 import { useGetMovieByNameQuery } from '../redux/slices/tmdbApi';
 
+
 const SearchedMovies = () => {
-	const { data, error, isLoading } = useGetMovieByNameQuery('the avengers')
+	const { data, error } = useGetMovieByNameQuery('the avengers')
+	console.log('qqq', data?.results || error)
 
 	return (
-		<View style={styles.container}>
-			{isLoading ? 
-				<Text>Loading...</Text> : 
-				data?.results?.map(movie => 
-					{ movie.poster_path && <Image 
-						key={movie.id}
-						source={{ uri: `https://image.tmdb.org/t/p/w500/${movie.poster_path}`}} /> 
-					}
-				)
-			}
-		</View>
+		<Text>Tim</Text>
 	)
+	// {data ? 
+	// 	<ScrollView
+	// 		contentContainerStyle={{
+	// 			paddingHorizontal: 15,
+	// 			paddingTop: 15
+	// 		}}
+	// 		horizontal
+	// 		showHorizontalScrollIndicator={false}>
+	// 		{selectMoviesResult?.results?.map(movie => (
+	// 			<Image 
+	// 				key={movie.id}
+	// 				style={styles.image}
+	// 				source={{uri: `https://image.tmdb.org/t/p/w500/${movie.poster_path}`}}/>
+	// 		))
+	// 		}
+	// 	</ScrollView> : 
+	// 	<Text>Nothing too view</Text>
+	// 	}
 }
 
 const styles = StyleSheet.create({
-	container: {
-		flexDirection: 'row',
-		padding: 10,
-		alignItems: 'center',
-	}
+  container: {
+    flexDirection: 'row',
+    padding: 10,
+  }, 
+  image: {
+    height: 75,
+    width: 75,
+    marginHorizontal: 15
+  }
 });
+
 
 export default SearchedMovies

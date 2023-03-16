@@ -17,3 +17,5 @@ export const tmdbApi = createApi({
 // Export hooks for usage in function components, which are
 // auto-generated based on the defined endpoints
 export const { useGetMovieByNameQuery } = tmdbApi
+
+// export const selectMoviesResult = tmdbApi.endpoints.getMovieByName.select()

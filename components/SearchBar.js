@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { View, TextInput, StyleSheet } from 'react-native';
 import { useDispatch } from 'react-redux'
-import { addMovieToDb, searchedMovie } from '../redux/slices/moviesSlice';
 import { MagnifyingGlassIcon } from 'react-native-heroicons/outline';
 import { useGetMovieByNameQuery } from '../redux/slices/tmdbApi';
 
 const SearchBar = () => {
-  const [movie, setMovie] = useState('');
+	const [movie, setMovie] = useState('');
+	const { data, error, isLoading } = useGetMovieByNameQuery(movie)
 
   return (
     <View style={styles.searchSection}>
