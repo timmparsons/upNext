@@ -3,9 +3,9 @@ import { Image, StyleSheet, ScrollView, Text } from 'react-native'
 import { useGetMovieByNameQuery } from '../redux/slices/tmdbApi';
 
 
-const SearchedMovies = () => {
-	const { data, error } = useGetMovieByNameQuery('the avengers')
-	console.log('qqq', data?.results || error)
+const SearchedMovies = ({ results }) => {
+	const { data, error } = useGetMovieByNameQuery()
+	console.log('qqq', data)
 
 	return (
 		<Text>Tim</Text>

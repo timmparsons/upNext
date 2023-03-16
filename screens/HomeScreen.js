@@ -32,8 +32,6 @@ const HomeScreen = () => {
 			<View>
 				<SearchBar />
 			</View>
-				{/* <GetSendMovie /> */}
-				<SearchedMovies />
 		</SafeAreaView>
 	)
 }
