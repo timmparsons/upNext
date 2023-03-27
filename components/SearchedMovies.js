@@ -5,10 +5,9 @@ import { useGetMovieByNameQuery } from '../redux/slices/tmdbApi';
 
 const SearchedMovies = ({ results }) => {
 	const { data, error } = useGetMovieByNameQuery()
-	console.log('qqq', data)
 
 	return (
-		<Text>Tim</Text>
+		<Text>Sesrched Movies section</Text>
 	)
 	// {data ? 
 	// 	<ScrollView
@@ -32,7 +31,7 @@ const SearchedMovies = ({ results }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
+		flexDirection: 'row',
     padding: 10,
   }, 
   image: {
