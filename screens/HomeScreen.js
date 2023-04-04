@@ -5,7 +5,7 @@ import { UserIcon } from 'react-native-heroicons/outline';
 import SearchBar from '../components/SearchBar';
 import { colors } from '../constants';
 import SearchedMovies from '../components/SearchedMovies';
-import YourMovies from '../components/YourMovies';
+import YourMoviesSection from '../components/YourMoviesSection';
 
 const HomeScreen = () => {
 	const navigation = useNavigation();
@@ -33,7 +33,7 @@ const HomeScreen = () => {
 				<SearchBar />
 			</View>
 			<ScrollView>
-				<YourMovies />
+				<YourMoviesSection />
 			</ScrollView>
 
 		</SafeAreaView>
@@ -74,4 +74,4 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default HomeScreen
+export default HomeScreen;
