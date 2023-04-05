@@ -2,16 +2,25 @@ import React from 'react'
 import { View, Text, ScrollView, Image, StyleSheet, TouchableOpacity, Button } from 'react-native'
 import { MOVIE_LIST } from '../constants/movieList';
 import { useNavigation } from '@react-navigation/native';
+import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 
 const MovieList = ({ selectedMovies, setSelectedMovies }) => {
 	const navigation = useNavigation();
 
 	const selectMovie = (movie) => {
-		const { id } = movie;
+		const { 
+			id, 
+			title,
+			overview,
+			poster_path, } = movie;
 
-		if(selectedMovies.includes(id)) return
+		// if(selectedMovies.includes(id)) return
 		setSelectedMovies([...selectedMovies, id])
-		navigation.navigate('Movie', { id })
+		navigation.navigate('Movie', { 
+			id, 
+			title,
+			overview,
+			poster_path, })
 	}
 
 	const getSelectedMovie = (movie) => {
@@ -27,14 +36,12 @@ const MovieList = ({ selectedMovies, setSelectedMovies }) => {
 			<TouchableOpacity 
 				style={styles.button}
 				onPress={() => selectMovie(movie)}>
-				{ getSelectedMovie && <View style={styles.imageBorder}>
 				<Image 
 					key={movie.id}
 					style={styles.image}
 					source={{uri: `https://image.tmdb.org/t/p/w500/${movie.poster_path}`}}/>
 				<Text>{movie.original_title}</Text>
-				</View>
-				}
+				<MaterialCommunityIcons name="send" size={24} color="black" />
 			</TouchableOpacity>
 			</View>
 			))
