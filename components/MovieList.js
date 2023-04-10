@@ -3,7 +3,6 @@ import { View, Text, ScrollView, Image, StyleSheet, TouchableOpacity, Button } f
 import { MOVIE_LIST } from '../constants/movieList';
 import { useNavigation } from '@react-navigation/native';
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
-import FriendList from './FriendList';
 
 const MovieList = ({
 	selectedMovies, 
