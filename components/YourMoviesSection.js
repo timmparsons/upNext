@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import { View, Text, ScrollView, Image, StyleSheet, TouchableOpacity, Button } from 'react-native'
+import { ScrollView, StyleSheet } from 'react-native'
 import MovieList from './MovieList';
 
 const YourMoviesSection = () => {
 	const [selectedMovies, setSelectedMovies] = useState([]);
+	const [shareWithFriend, setShareWithFriend] = useState(false);
 
 	return (
 		<ScrollView
@@ -18,6 +19,8 @@ const YourMoviesSection = () => {
 			style={styles.MovieList} 
 			selectedMovies={selectedMovies}
 			setSelectedMovies={setSelectedMovies}
+			shareWithFriend={shareWithFriend}
+			setShareWithFriend={setShareWithFriend}
 		/>
 		</ScrollView> 
 	)

@@ -1,10 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View, Text, ScrollView, Image, StyleSheet, TouchableOpacity, Button } from 'react-native'
 import { MOVIE_LIST } from '../constants/movieList';
 import { useNavigation } from '@react-navigation/native';
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
+import FriendList from './FriendList';
 
-const MovieList = ({ selectedMovies, setSelectedMovies }) => {
+const MovieList = ({
+	selectedMovies, 
+	setSelectedMovies, 
+	setShareWithFriend,
+	shareWithFriend }) => {
 	const navigation = useNavigation();
 
 	const selectMovie = (movie) => {
@@ -27,6 +32,10 @@ const MovieList = ({ selectedMovies, setSelectedMovies }) => {
 		return selectedMovies.includes(movie.id);
 	}
 
+	const sendToFriend = () => {
+		setShareWithFriend(!shareWithFriend)
+	}
+
 	return (
 		<ScrollView
 			horizontal
@@ -41,8 +50,15 @@ const MovieList = ({ selectedMovies, setSelectedMovies }) => {
 					style={styles.image}
 					source={{uri: `https://image.tmdb.org/t/p/w500/${movie.poster_path}`}}/>
 				<Text>{movie.original_title}</Text>
-				<MaterialCommunityIcons name="send" size={24} color="black" />
+				<MaterialCommunityIcons 
+					name="send" 
+					size={24} 
+					color="black"
+					onPress={sendToFriend} />
 			</TouchableOpacity>
+			<View>
+				{ shareWithFriend && <FriendList /> }
+			</View>
 			</View>
 			))
 		}

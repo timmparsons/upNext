@@ -40,3 +40,14 @@ export const MOVIE_LIST = [
 		"vote_count": 3945
 	}
 ]
+
+export const FRIEND_LIST = [
+	{
+		id: 1,
+		name: 'Tim'
+	},
+	{
+		id: 2,
+		name: 'Jennifer'
+	}
+]
